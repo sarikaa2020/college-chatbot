@@ -1,0 +1,56 @@
+{
+  "intents": [
+    {
+      "tag": "greeting",
+      "patterns": ["Hi", "Hello", "Hey", "Good morning", "Good evening"],
+      "responses": ["Hello! How can I help you today?"]
+    },
+    {
+      "tag": "courses",
+      "patterns": [
+        "What courses are available?",
+        "Courses offered",
+        "What departments are there?",
+        "List of courses",
+        "Available branches"
+      ],
+      "responses": [
+        "We offer CSE, ECE, EEE, MECH and CIVIL."
+      ]
+    },
+    {
+      "tag": "fees",
+      "patterns": [
+        "Fee structure",
+        "Fees for CSE",
+        "What is the course fee?",
+        "How much is the fee?",
+        "College fees"
+      ],
+      "responses": [
+        "The fee for CSE is Rs. 75,000 per year."
+      ]
+    },
+    {
+      "tag": "placements",
+      "patterns": [
+        "Placement details",
+        "Companies visiting",
+        "Placement information",
+        "Top recruiters",
+        "Placement record"
+      ],
+      "responses": [
+        "Top recruiters include TCS, Infosys, Wipro and Cognizant."
+      ]
+    },
+    {
+      "tag": "fallback",
+      "patterns": ["*"],
+      "responses": [
+        "Sorry, I didn't understand that. Please ask about courses, fees, or placements."
+      ]
+    }
+  ]
+}
+
