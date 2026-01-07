@@ -46,11 +46,10 @@
     },
     {
       "tag": "fallback",
-      "patterns": ["*"],
+      "patterns": [],
       "responses": [
-        "Sorry, I didn't understand that. Please ask about courses, fees, or placements."
+        "Sorry, I didn’t understand that. Please ask about courses, fees, placements, admissions, or hostel details."
       ]
     }
   ]
 }
-

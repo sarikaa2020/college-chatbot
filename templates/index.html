@@ -8,7 +8,16 @@
 
 <div class="chatbox">
     <h2>🎓 College Chatbot</h2>
-    <div id="chat"></div>
+
+    <div id="chat">
+        <!-- ✅ Welcome message -->
+        <p><b>Bot:</b> 👋 Hello! I am the College Chatbot.<br>
+        You can ask me about:<br>
+        • Admissions<br>
+        • Courses<br>
+        • Fees<br>
+        • Placements</p>
+    </div>
 
     <input type="text" id="userInput" placeholder="Ask something...">
     <button onclick="send()">Send</button>
@@ -17,17 +26,27 @@
 <script>
 function send() {
     let msg = document.getElementById("userInput").value;
+
+    if (msg.trim() === "") return;
+
+    document.getElementById("chat").innerHTML +=
+        "<p><b>You:</b> " + msg + "</p>";
+
     fetch("/get", {
         method: "POST",
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({msg: msg})
+        body: JSON.stringify({ msg: msg })
     })
     .then(res => res.json())
     .then(data => {
         document.getElementById("chat").innerHTML +=
-        "<p><b>You:</b> " + msg + "</p><p><b>Bot:</b> " + data.reply + "</p>";
-        document.getElementById("userInput").value = "";
+            "<p><b>Bot:</b> " + data.reply + "</p>";
+
+        document.getElementById("chat").scrollTop =
+            document.getElementById("chat").scrollHeight;
     });
+
+    document.getElementById("userInput").value = "";
 }
 </script>
 

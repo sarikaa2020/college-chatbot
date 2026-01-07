@@ -1,37 +1,49 @@
 import json
 import random
 import nltk
-from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
+from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
 
 nltk.download("punkt")
+nltk.download("stopwords")
+
+stop_words = set(stopwords.words("english"))
 
 with open("intents.json") as file:
     data = json.load(file)
 
+def clean_sentence(sentence):
+    words = word_tokenize(sentence.lower())
+    return [w for w in words if w.isalnum() and w not in stop_words]
+
+def similarity(a, b):
+    a = set(a)
+    b = set(b)
+    return len(a & b) / max(len(a | b), 1)
+
 def get_response(user_input):
-    sentences = []
-    tags = []
+    user_words = clean_sentence(user_input)
+
+    best_score = 0
+    best_response = None
 
     for intent in data["intents"]:
+        if intent["tag"] == "fallback":
+            continue
+
         for pattern in intent["patterns"]:
-            sentences.append(pattern)
-            tags.append(intent)
+            pattern_words = clean_sentence(pattern)
+            score = similarity(user_words, pattern_words)
 
-    sentences.append(user_input)
+            if score > best_score:
+                best_score = score
+                best_response = random.choice(intent["responses"])
 
-    # ✅ remove stopwords
-    vectorizer = CountVectorizer(stop_words="english")
-    vectors = vectorizer.fit_transform(sentences)
+    # THRESHOLD (VERY IMPORTANT)
+    if best_score < 0.3:
+        # return fallback
+        for intent in data["intents"]:
+            if intent["tag"] == "fallback":
+                return random.choice(intent["responses"])
 
-    similarity = cosine_similarity(vectors[-1], vectors[:-1])
-    best_match = similarity.max()
-
-    # ✅ stronger fallback condition
-    if best_match < 0.4:
-        return "❌ Sorry, I didn’t understand that. Please ask about courses, fees, admissions, or placements."
-
-    index = similarity.argmax()
-    intent = tags[index]
-
-    return random.choice(intent["responses"])
+    return best_response
