@@ -55,3 +55,20 @@ git clone https://github.com/sarikaa2020/college-chatbot.git
 cd college-chatbot
 
 
+🔹 Create Virtual Environment (Recommended)
+python -m venv venv
+
+Activate:
+Windows
+venv\Scripts\activate
+
+Linux / macOS
+source venv/bin/activate
+
+🔹 Install Dependencies
+pip install -r requirements.txt
+
+
+
+
+
