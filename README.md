@@ -41,5 +41,12 @@ college-chatbot/
 ├── Dockerfile              # Docker configuration
 └── README.md
 
+Installation & Setup:
+🔹 Prerequisites
 
+->Python 3.8+
+
+->pip
+
+->Git
 
