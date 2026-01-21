@@ -50,3 +50,8 @@ Installation & Setup:
 
 ->Git
 
+🔹 Clone the Repository
+git clone https://github.com/sarikaa2020/college-chatbot.git
+cd college-chatbot
+
+
