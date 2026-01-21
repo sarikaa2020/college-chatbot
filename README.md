@@ -27,5 +27,19 @@ Tech Stack:
 | Deployment  | Docker              |
 | Environment | Virtualenv          |
 
+Project Structure:
+
+college-chatbot/
+│
+├── static/                 # CSS, JS, assets
+├── templates/              # HTML templates
+│
+├── app.py                  # Flask application entry point
+├── chatbot.py              # Chatbot logic
+├── intents.json            # Chat intents and responses
+├── requirements.txt        # Python dependencies
+├── Dockerfile              # Docker configuration
+└── README.md
+
 
 
